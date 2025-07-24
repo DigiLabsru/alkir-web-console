@@ -14,7 +14,6 @@ def update_tree(server: str, containers: dict):
 
 
 async def load_data(containers, server):
-    # main_container = containers['tree_container']
     try:
         menu_data = gen_menu_data(server)
     except Exception as ex:

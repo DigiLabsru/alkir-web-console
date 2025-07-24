@@ -39,7 +39,7 @@ def gen_menu_data(server: str):
                     rac.close()
                     all_base = {_.getInfoBaseId().toString(): _.getName() for _ in infobases_list}
                     session_all = {_.getConnectionId().toString(): _ for _ in rac_session_all if _.getConnectionId().toString() != '00000000-0000-0000-0000-000000000000'}
-                    menu_cluster_admins_list = [{"id": f"clusters|{current_cluster_id}|admins|{_.getName()}", "text": _.getName()} for _ in cluster_admins_list]
+                    # menu_cluster_admins_list = [{"id": f"clusters|{current_cluster_id}|admins|{_.getName()}", "text": _.getName()} for _ in cluster_admins_list]
                     for one_base in infobases_list:
                         menu_infobases_list.append(
                             {
@@ -141,7 +141,7 @@ def gen_menu_data(server: str):
                         {"id": f"clusters|{current_cluster_id}|cluster", "text": one_cluster.getName(), "children": [
                             {"id": f"clusters|{current_cluster_id}|info_base", "text": f"Информационные базы ({len(menu_infobases_list)})", "children": menu_infobases_list},
                             {"id": f"clusters|{current_cluster_id}|work_server", "text": f"Рабочие серверы ({len(menu_work_server_list)})", "children": menu_work_server_list},
-                            {"id": f"clusters|{current_cluster_id}|admins", "text": f"Администраторы ({len(menu_cluster_admins_list)})", "children": menu_cluster_admins_list},
+                            {"id": f"clusters|{current_cluster_id}|admins", "text": f"Администраторы ({cluster_admins_list.size()})"},
                             {"id": f"clusters|{current_cluster_id}|cluster_manager", "text": f"Менеджеры кластера ({len(menu_cluster_manager_list)})", "children": menu_cluster_manager_list},
                             {"id": f"clusters|{current_cluster_id}|work_processes", "text": f"Рабочие процессы ({len(menu_work_process_list)})", "children": menu_work_process_list},
                             {"id": f"clusters|{current_cluster_id}|all_sessions", "text": "Сеансы"},
