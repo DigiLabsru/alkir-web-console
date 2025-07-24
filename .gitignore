@@ -1,0 +1,9 @@
+*.py[cod]
+__pycache__/
+.DS_Store
+.venv*/
+.pytest_cache/
+.idea/
+.nicegui/*
+\!temp/*
+\!env/*

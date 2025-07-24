@@ -1,4 +1,4 @@
-# Alkir Web Console Public
+# alkir-web-console
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.alkir.digilabs.ru/ones/alkir-web-console-public.git
+git remote add origin https://gitlab.alkir.digilabs.ru/ones/alkir-web-console.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab.alkir.digilabs.ru/ones/alkir-web-console-public/-/settings/integrations)
+- [ ] [Set up project integrations](https://gitlab.alkir.digilabs.ru/ones/alkir-web-console/-/settings/integrations)
 
 ## Collaborate with your team
 
