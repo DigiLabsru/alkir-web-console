@@ -4,11 +4,13 @@ from nicegui import ui
 from ..data.gen_menu_data import gen_menu_data
 from .update_main import update_main
 
+update_tree_default_classes: str = "flex w-full min-h-0 grow overflow-y-auto"
+
 
 def update_tree(server: str, containers: dict):
-    """Обновляет дерево для выбранного сервера"""
     containers['tree_container'].clear()
-    with containers['tree_container'].classes('justify-center items-center'):
+    containers['tree_container'].classes.clear()
+    with containers['tree_container'].classes(f'{update_tree_default_classes} justify-center items-center'):
         ui.spinner('gears', size='6em')
     ui.timer(0.5, once=True, callback=lambda: load_data(containers=containers, server=server))
 
@@ -24,7 +26,8 @@ async def load_data(containers, server):
         containers['main_container'].clear()
         return
     containers['tree_container'].clear()
-    with containers['tree_container'].classes('justify-start items-start'):
+    containers['tree_container'].classes.clear()
+    with containers['tree_container'].classes(f'{update_tree_default_classes} justify-start items-start'):
         ui.tree(
             menu_data,
             node_key='id',

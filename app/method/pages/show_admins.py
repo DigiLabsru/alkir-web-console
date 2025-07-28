@@ -3,10 +3,13 @@ from nicegui import run, ui
 
 from ..data.gen_table_method.get_admins import get_admins
 
+show_admins_default_classes: str = 'nicegui-column w-[79%] h-full text-aqua bg-[#2A2A2A] rounded-lg p-2 flex-col'
+
 
 def show_admins(connect_info, main_container):
     main_container.clear()
-    with main_container.classes('justify-center items-center grow'):
+    main_container.classes.clear()
+    with main_container.classes(f'{show_admins_default_classes} justify-center items-center grow'):
         ui.spinner('gears', size='6em')
     ui.timer(0.5, once=True, callback=lambda: load_data(container=main_container, connect_info=connect_info))
 
@@ -22,7 +25,8 @@ async def load_data(container, connect_info):
         container.clear()
         return
     container.clear()
-    with container.classes('justify-start items-start'):
+    container.classes.clear()
+    with container.classes(f'{show_admins_default_classes} justify-start items-start'):
         ui.button(icon='autorenew', on_click=lambda: show_admins(main_container=container, connect_info=connect_info)).classes('ml-auto')
         ui.aggrid(
             options={

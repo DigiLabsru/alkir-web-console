@@ -2,8 +2,7 @@
 # hide - скрывает столбец
 # suppressSizeToFit=true
 columns = [
-    {"headerName": "№", "field": "count", 'filter': False, 'checkboxSelection': True},
-    {"headerName": "Приложение", "field": "app_id"},
+    {"headerName": "Приложение", "field": "app_id", 'checkboxSelection': True},
     # {"headerName": "blocked_by_ls", "field": "blocked_by_ls"},
     {"headerName": "Соединение", "field": "conn_id"},
     {"headerName": "Начало работы", "field": "connected_at"},

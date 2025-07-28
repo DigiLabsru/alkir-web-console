@@ -1,16 +1,26 @@
-from nicegui import ui
+from nicegui import run, ui
 
 from ..data.gen_table_method.get_all_locks import get_all_locks
 
+show_locks_default_classes: str = 'nicegui-column w-[79%] h-full text-aqua bg-[#2A2A2A] rounded-lg p-2 flex-col'
+
 
 def show_locks(connect_info, main_container):
-    data = get_all_locks(connect_info=connect_info)
     main_container.clear()
-    # Контейнер для кнопки с выравниванием и отступами
-    with main_container:
+    main_container.classes.clear()
+    with main_container.classes(f'{show_locks_default_classes} justify-center items-center grow'):
+        ui.spinner('gears', size='6em')
+        ui.timer(0.5, once=True, callback=lambda: load_data(main_container=main_container, connect_info=connect_info))
+
+
+async def load_data(connect_info, main_container):
+    data = await run.io_bound(get_all_locks, connect_info=connect_info)
+    main_container.clear()
+    main_container.classes.clear()
+    with main_container.classes(show_locks_default_classes):
         with ui.row().classes('w-full'):
-            header = ui.label(data["header"]).classes('text-custom-green text-sm')
-            ui.button(icon='autorenew', on_click=lambda: update_table_data(table=table, header=header, connect_info=connect_info)).classes('ml-auto')
+            ui.label(data["header"]).classes('text-custom-green text-sm')
+            ui.button(icon='autorenew', on_click=lambda: show_locks(main_container=main_container, connect_info=connect_info)).classes('ml-auto')
             with ui.button(icon='menu'):
                 with ui.menu(), ui.column().classes('gap-0 p-2'):
                     for column in data["columns"]:
@@ -42,8 +52,8 @@ def show_locks(connect_info, main_container):
                 ).classes('ag-theme-balham-dark w-full h-full')
 
 
-def update_table_data(table, header, connect_info):
-    new_data = get_all_locks(connect_info=connect_info)
-    header.set_text(new_data["header"])
-    table.options["rowData"] = new_data["data"]
-    table.update()
+# def update_table_data(table, header, connect_info):
+#     new_data = get_all_locks(connect_info=connect_info)
+#     header.set_text(new_data["header"])
+#     table.options["rowData"] = new_data["data"]
+#     table.update()

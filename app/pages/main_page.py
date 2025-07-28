@@ -41,7 +41,7 @@ def create_main_page():
                 on_change=lambda e: update_tree(server=e.value, containers={"tree_container": tree_container, "main_container": main_container, "root_select": root_select})
             ).classes('w-full rounded-lg flex-none').props(add='outlined')
             # Контейнер для дерева
-            tree_container = ui.element().classes('flex w-full min-h-0 grow overflow-y-auto')
+            tree_container = ui.element()
             ui.button('Выйти', on_click=handle_logout).classes('w-full font-bold rounded-lg flex-none')
         # Правая панель
         main_container = ui.column().classes('w-[79%] h-full text-aqua bg-[#2A2A2A] rounded-lg p-2 flex-col')

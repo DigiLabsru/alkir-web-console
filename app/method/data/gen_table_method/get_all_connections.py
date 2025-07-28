@@ -22,11 +22,8 @@ def get_all_connections(connect_info):
         result['data'] = []
         SimpleDateFormat = jpype.JClass('java.text.SimpleDateFormat')
         sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        count: int = 0
         for one_connection in connection_all:
-            count += 1
             result_data: dict = {
-                "count": count,
                 "app_id": app_translate.get(one_connection.getApplication(), 'не определено'),
                 "blocked_by_ls": one_connection.getBlockedByLs(),
                 "conn_id": one_connection.getConnId(),
