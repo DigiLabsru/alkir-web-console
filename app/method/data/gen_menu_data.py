@@ -85,12 +85,12 @@ def gen_menu_data(server: str):
                                     {
                                         "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|cluster_manager",
                                         "text": "Менеджеры кластера",
-                                        "children": [
-                                            {
-                                                "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|cluster_manager|role",
-                                                "text": "Главный менеджер кластера" if one_work_server.isMainServer() is True else "Дополнительный менеджер кластера"
-                                            }
-                                        ]
+                                        # "children": [
+                                        #     {
+                                        #         "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|cluster_manager|role",
+                                        #         "text": "Главный менеджер кластера" if one_work_server.isMainServer() is True else "Дополнительный менеджер кластера"
+                                        #     }
+                                        # ]
                                     },
                                     {
                                         "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|work_process",
@@ -142,7 +142,8 @@ def gen_menu_data(server: str):
                             {"id": f"clusters|{current_cluster_id}|info_base", "text": f"Информационные базы ({len(menu_infobases_list)})", "children": menu_infobases_list},
                             {"id": f"clusters|{current_cluster_id}|work_server", "text": f"Рабочие серверы ({len(menu_work_server_list)})", "children": menu_work_server_list},
                             {"id": f"clusters|{current_cluster_id}|admins", "text": f"Администраторы ({cluster_admins_list.size()})"},
-                            {"id": f"clusters|{current_cluster_id}|cluster_manager", "text": f"Менеджеры кластера ({len(menu_cluster_manager_list)})", "children": menu_cluster_manager_list},
+                            # {"id": f"clusters|{current_cluster_id}|cluster_manager", "text": f"Менеджеры кластера ({len(menu_cluster_manager_list)})", "children": menu_cluster_manager_list},
+                            {"id": f"clusters|{current_cluster_id}|cluster_manager", "text": f"Менеджеры кластера ({len(menu_cluster_manager_list)})"},
                             {"id": f"clusters|{current_cluster_id}|work_processes", "text": f"Рабочие процессы ({len(menu_work_process_list)})", "children": menu_work_process_list},
                             {"id": f"clusters|{current_cluster_id}|all_sessions", "text": "Сеансы"},
                             {"id": f"clusters|{current_cluster_id}|locks", "text": "Блокировки"},

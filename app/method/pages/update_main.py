@@ -2,6 +2,7 @@ from loguru import logger
 from nicegui import ui
 
 from .show_admins import show_admins
+from .show_cluster_manager import show_cluster_manager
 from .show_clusters import show_clusters
 from .show_connections import show_connections
 from .show_locks import show_locks
@@ -31,6 +32,8 @@ def update_main(id: str, main_container, server: str):
                     show_locks(connect_info=connect_info, main_container=main_container)
                 case _ if id_list[-1] == 'admins':
                     show_admins(connect_info=connect_info, main_container=main_container)
+                case _ if id_list[-1] == 'cluster_manager':
+                    show_cluster_manager(connect_info=connect_info, main_container=main_container)
                 case _:
                     return {
                         "columns": [
