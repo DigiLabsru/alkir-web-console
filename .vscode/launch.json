@@ -19,6 +19,7 @@
       ],
       "jinja": true,
       "justMyCode": true,
+      "preLaunchTask": "generate-env",
       "presentation": {
         "hidden": false,
         "group": "api",
