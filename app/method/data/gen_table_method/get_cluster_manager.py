@@ -49,20 +49,6 @@ def get_cluster_manager(connect_info):
             result['data'].append(
                 {"service_name": one_service['descr']} | {_['id']: "✅" if _["id"] in one_service['managers'] else "❌" for _ in cluster_managers_data}
             )
-        # for one_cluster_manager_data in cluster_managers_data:
-
-        # Роль
-        # PID
-        # IP Порт
-        # for one_admin in cluster_admins_list:
-        #     result_data: dict = {
-        #         "descr": one_admin.getDescr(),
-        #         "name": one_admin.getName(),
-        #         "domain_name": one_admin.getSysUserName().replace("\\\\", "\\"),
-        #         "password_allow": "✅" if one_admin.isPasswordAuthAllowed() is True else "❌",
-        #         "domain_password_allow": "✅" if one_admin.isSysAuthAllowed() is True else "❌"
-        #     }
-        #     result['data'].append(result_data)
         return result
     except Exception as ex:
         raise Exception(f"Произошла ошибка при обработке данных. Текст ошибки: {ex}")

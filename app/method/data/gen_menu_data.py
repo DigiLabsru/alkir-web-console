@@ -25,8 +25,8 @@ def gen_menu_data(server: str):
                     current_cluster_id = one_cluster.getClusterId().toString()
                     menu_infobases_list: list = []
                     menu_work_server_list: list = []
-                    menu_work_process_list: list = []
-                    menu_cluster_manager_list: list = []
+                    # menu_work_process_list: list = []
+                    # menu_cluster_manager_list: list = []
                     menu_locks_per_connection: list = []
                     one_server.cluster_id = current_cluster_id
                     rac = RasInterface(req=one_server)
@@ -57,62 +57,62 @@ def gen_menu_data(server: str):
                                 ]
                             }
                         )
-                    for one_work_process in work_process_list:
-                        menu_work_process_list.append(
-                            {
-                                "id": f"clusters|{current_cluster_id}|work_process|{one_work_process.getWorkingProcessId().toString()}",
-                                "text": one_work_process.getHostName(),
-                                "children": [
-                                    {
-                                        "id": f"clusters|{current_cluster_id}|work_process|{one_work_process.getWorkingProcessId().toString()}|connections",
-                                        "text": "Соединения"
-                                    }
-                                ]
-                            }
-                        )
-                    for one_work_server in work_server_list:
-                        menu_cluster_manager_list.append(
-                            {
-                                "id": f"clusters|{current_cluster_id}|cluster_manager|{one_work_server.getWorkingServerId().toString()}",
-                                "text": "Главный менеджер кластера" if one_work_server.isMainServer() is True else "Дополнительный менеджер кластера"
-                            }
-                        )
-                        menu_work_server_list.append(
-                            {
-                                "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}",
-                                "text": one_work_server.getHostName(),
-                                "children": [
-                                    {
-                                        "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|cluster_manager",
-                                        "text": "Менеджеры кластера",
-                                        # "children": [
-                                        #     {
-                                        #         "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|cluster_manager|role",
-                                        #         "text": "Главный менеджер кластера" if one_work_server.isMainServer() is True else "Дополнительный менеджер кластера"
-                                        #     }
-                                        # ]
-                                    },
-                                    {
-                                        "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|work_process",
-                                        "text": "Рабочие процессы",
-                                        "children": [
-                                            {
-                                                "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|work_process|role",
-                                                "text": "Главный менеджер кластера" if one_work_server.isMainServer() is True else "Дополнительный менеджер кластера"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|tnf",
-                                        "text": "Требования назначения функциональности",
-                                    },
-                                    {
-                                        "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|service_config",
-                                        "text": "Настройки сервисов",
-                                    }
-                                ]
-                            }
-                        )
+                    # for one_work_process in work_process_list:
+                    #     menu_work_process_list.append(
+                    #         {
+                    #             "id": f"clusters|{current_cluster_id}|work_process|{one_work_process.getWorkingProcessId().toString()}",
+                    #             "text": one_work_process.getHostName(),
+                    #             "children": [
+                    #                 {
+                    #                     "id": f"clusters|{current_cluster_id}|work_process|{one_work_process.getWorkingProcessId().toString()}|connections",
+                    #                     "text": "Соединения"
+                    #                 }
+                    #             ]
+                    #         }
+                    #     )
+                    # for one_work_server in work_server_list:
+                    #     menu_cluster_manager_list.append(
+                    #         {
+                    #             "id": f"clusters|{current_cluster_id}|cluster_manager|{one_work_server.getWorkingServerId().toString()}",
+                    #             "text": "Главный менеджер кластера" if one_work_server.isMainServer() is True else "Дополнительный менеджер кластера"
+                    #         }
+                    #     )
+                    #     menu_work_server_list.append(
+                    #         {
+                    #             "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}",
+                    #             "text": one_work_server.getHostName(),
+                    #             "children": [
+                    #                 {
+                    #                     "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|cluster_manager",
+                    #                     "text": "Менеджеры кластера",
+                    #                     # "children": [
+                    #                     #     {
+                    #                     #         "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|cluster_manager|role",
+                    #                     #         "text": "Главный менеджер кластера" if one_work_server.isMainServer() is True else "Дополнительный менеджер кластера"
+                    #                     #     }
+                    #                     # ]
+                    #                 },
+                    #                 {
+                    #                     "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|work_process",
+                    #                     "text": "Рабочие процессы",
+                    #                     "children": [
+                    #                         {
+                    #                             "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|work_process|role",
+                    #                             "text": "Главный менеджер кластера" if one_work_server.isMainServer() is True else "Дополнительный менеджер кластера"
+                    #                         }
+                    #                     ]
+                    #                 },
+                    #                 {
+                    #                     "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|tnf",
+                    #                     "text": "Требования назначения функциональности",
+                    #                 },
+                    #                 {
+                    #                     "id": f"clusters|{current_cluster_id}|work_server|{one_work_server.getWorkingServerId().toString()}|service_config",
+                    #                     "text": "Настройки сервисов",
+                    #                 }
+                    #             ]
+                    #         }
+                    #     )
                     for one_lock in locks_list:
                         if one_lock.getConnectionId().toString() != '00000000-0000-0000-0000-000000000000':
                             if session_all.get(one_lock.getConnectionId().toString(), None) is not None:
@@ -143,14 +143,15 @@ def gen_menu_data(server: str):
                             {"id": f"clusters|{current_cluster_id}|work_server", "text": f"Рабочие серверы ({len(menu_work_server_list)})", "children": menu_work_server_list},
                             {"id": f"clusters|{current_cluster_id}|admins", "text": f"Администраторы ({cluster_admins_list.size()})"},
                             # {"id": f"clusters|{current_cluster_id}|cluster_manager", "text": f"Менеджеры кластера ({len(menu_cluster_manager_list)})", "children": menu_cluster_manager_list},
-                            {"id": f"clusters|{current_cluster_id}|cluster_manager", "text": f"Менеджеры кластера ({len(menu_cluster_manager_list)})"},
-                            {"id": f"clusters|{current_cluster_id}|work_processes", "text": f"Рабочие процессы ({len(menu_work_process_list)})", "children": menu_work_process_list},
+                            {"id": f"clusters|{current_cluster_id}|cluster_manager", "text": f"Менеджеры кластера ({len(work_server_list)})"},
+                            # {"id": f"clusters|{current_cluster_id}|work_processes", "text": f"Рабочие процессы ({len(menu_work_process_list)})", "children": menu_work_process_list},
+                            {"id": f"clusters|{current_cluster_id}|work_processes", "text": f"Рабочие процессы ({len(work_process_list)})"},
                             {"id": f"clusters|{current_cluster_id}|all_sessions", "text": "Сеансы"},
                             {"id": f"clusters|{current_cluster_id}|locks", "text": "Блокировки"},
                             {"id": f"clusters|{current_cluster_id}|connections", "text": "Соединения"},
-                            {"id": f"clusters|{current_cluster_id}|security_profiles", "text": "Профили безопасности"},
-                            {"id": f"clusters|{current_cluster_id}|resource_consumption_counters", "text": "Счетчики потребления ресурсов"},
-                            {"id": f"clusters|{current_cluster_id}|resource_consumption_restrictions", "text": "Ограничения потребления ресурсов"}
+                            # {"id": f"clusters|{current_cluster_id}|security_profiles", "text": "Профили безопасности"},
+                            # {"id": f"clusters|{current_cluster_id}|resource_consumption_counters", "text": "Счетчики потребления ресурсов"},
+                            # {"id": f"clusters|{current_cluster_id}|resource_consumption_restrictions", "text": "Ограничения потребления ресурсов"}
                         ]
                         }
                     )
