@@ -10,6 +10,7 @@ from .show_one_cluster import show_one_cluster
 from .show_sessions import show_sessions
 from .show_sessions_per_base import show_sessions_per_base
 from .show_work_processes import show_work_processes
+from .show_work_server import show_work_server
 
 
 def update_main(id: str, main_container, server: str):
@@ -37,6 +38,8 @@ def update_main(id: str, main_container, server: str):
                     show_cluster_manager(connect_info=connect_info, main_container=main_container)
                 case _ if id_list[-1] == 'work_processes':
                     show_work_processes(connect_info=connect_info, main_container=main_container)
+                case _ if id_list[-2] == 'work_server':
+                    show_work_server(connect_info=connect_info, main_container=main_container, work_server_id=id_list[-1])
                 case _:
                     return {
                         "columns": [
