@@ -2,6 +2,7 @@ from loguru import logger
 from nicegui import ui
 
 from .show_admins import show_admins
+from .show_agent_admins import show_agent_admins
 from .show_cluster_manager import show_cluster_manager
 from .show_clusters import show_clusters
 from .show_connections import show_connections
@@ -15,7 +16,7 @@ from .show_work_server import show_work_server
 
 def update_main(id: str, main_container, server: str):
     from ...main import start_settings
-    connect_info = [_ for _ in start_settings.server_list if _.ras_server == server][0]
+    connect_info = [_ for _ in start_settings.server_list if f'{_.ras_server}:{_.ras_port}' == server][0]
     if id is not None:
         id_list = id.split("|")
         try:
@@ -34,6 +35,8 @@ def update_main(id: str, main_container, server: str):
                     show_locks(connect_info=connect_info, main_container=main_container)
                 case _ if id_list[-1] == 'admins':
                     show_admins(connect_info=connect_info, main_container=main_container)
+                case _ if id_list[-1] == 'central_admins':
+                    show_agent_admins(connect_info=connect_info, main_container=main_container)
                 case _ if id_list[-1] == 'cluster_manager':
                     show_cluster_manager(connect_info=connect_info, main_container=main_container)
                 case _ if id_list[-1] == 'work_processes':

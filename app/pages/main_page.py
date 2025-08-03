@@ -35,7 +35,7 @@ def create_main_page():
         # Левая панель
         with ui.column().classes('w-[19%] h-full bg-[#2A2A2A] p-2 rounded-lg flex-col'):
             root_select = ui.select(
-                options={_.ras_server: f'{_.ras_server}:{_.ras_port}' for _ in start_settings.server_list},
+                options={f'{_.ras_server}:{_.ras_port}': f'{_.ras_server}:{_.ras_port}' for _ in start_settings.server_list},
                 label='Выберите сервер',
                 with_input=True,
                 on_change=lambda e: update_tree(server=e.value, containers={"tree_container": tree_container, "main_container": main_container, "root_select": root_select})

@@ -11,7 +11,7 @@ def show_work_server(connect_info, main_container, work_server_id: str):
     main_container.classes.clear()
     with main_container.classes(f'{show_admins_default_classes} justify-center items-center grow'):
         ui.spinner('gears', size='6em')
-    ui.timer(0.5, once=True, callback=lambda: load_data(container=main_container, connect_info=connect_info, work_server_id=work_server_id))
+        ui.timer(0.5, once=True, callback=lambda: load_data(container=main_container, connect_info=connect_info, work_server_id=work_server_id))
 
 
 async def load_data(container, connect_info, work_server_id: str):
@@ -41,7 +41,7 @@ async def load_data(container, connect_info, work_server_id: str):
                     with ui.card().classes(card_classes):
                         with ui.grid(columns=2).classes(greed_classes):
                             ui.label("Описание сервера:")
-                            ui.label(new_data['working_server_info']['host_name'])
+                            ui.label(new_data['working_server_info']['name'])
                             ui.label("Компьютер:")
                             ui.label(new_data['working_server_info']['host_name'])
                             ui.label("IP порт:")

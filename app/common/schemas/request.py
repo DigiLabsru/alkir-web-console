@@ -129,7 +129,7 @@ class ConnectionDisconnect(BaseRequest):
     ib_pwb: str = Field(title='Пароль админа кластера', description='Пароль админа кластера', default="")
 
 
-class NewAdmin(BaseRequest):
+class NewAdmin(BaseModel):
     new_admin_descr: str = Field(title='Описание', description="Устанавливает описание центрального администратора сервера или администратора кластера серверов")
     new_admin_name: str = Field(title='Имя', description="Устанавливает имя центрального администратора сервера или администратора кластера серверов. В случае локальной \
 авторизации это является логинов.")

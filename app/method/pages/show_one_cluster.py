@@ -16,44 +16,45 @@ def show_one_cluster(connect_info, main_container):
             with ui.tab_panel(current).classes('w-full'):
                 with ui.card().classes(card_classes):
                     ui.label("Параметры кластера:")
-                    with ui.grid(columns=2).classes(greed_classes):
-                        ui.label("Версия платформы:")
-                        ui.label(data['platform_version'])
-                        ui.label("Имя кластера:")
-                        ui.label(data['name'])
-                        ui.label("Компьютер:")
-                        ui.label(data['host_name'])
-                        ui.label("IP порт:")
-                        ui.label(data['main_port'])
-                        ui.label("Защищенное соединение")
-                        ui.label(data['security_level'])
-                        ui.label("Разрешать запись событий аудита прав доступа:")
-                        ui.label(data['security_level'])
-                with ui.card().classes(card_classes):
+                    with ui.card().classes(card_classes):
+                        with ui.grid(columns=2).classes(greed_classes):
+                            ui.label("Версия платформы:")
+                            ui.label(data['platform_version'])
+                            ui.label("Имя кластера:")
+                            ui.label(data['name'])
+                            ui.label("Компьютер:")
+                            ui.label(data['host_name'])
+                            ui.label("IP порт:")
+                            ui.label(data['main_port'])
+                            ui.label("Защищенное соединение")
+                            ui.label(data['security_level'])
+                            ui.label("Разрешать запись событий аудита прав доступа:")
+                            ui.label(data['security_level'])
                     ui.label("Настройка перезапуска рабочих процессов")
-                    with ui.grid(columns=2).classes(greed_classes):
-                        ui.label("Расписание перезапуска:")
-                        ui.label(data['security_level'])
-                        ui.label("Принудительно завершать проблемные процессы:")
-                        ui.label("Да" if data['cluster_recycling_kill_problem_processes'] is True else "Нет")
-                        ui.label("Записывать дамп процесса при превышении критического объема памяти:")
-                        ui.label("Да" if data['cluster_recycling_kill_by_memory_with_dump'] is True else "Нет")
-                        ui.label("Проблемные процессы завершать через:")
-                        ui.label(data['expiration_timeout'])
-                with ui.card().classes(card_classes):
+                    with ui.card().classes(card_classes):
+                        with ui.grid(columns=2).classes(greed_classes):
+                            ui.label("Расписание перезапуска:")
+                            ui.label(data['security_level'])
+                            ui.label("Принудительно завершать проблемные процессы:")
+                            ui.label("Да" if data['cluster_recycling_kill_problem_processes'] is True else "Нет")
+                            ui.label("Записывать дамп процесса при превышении критического объема памяти:")
+                            ui.label("Да" if data['cluster_recycling_kill_by_memory_with_dump'] is True else "Нет")
+                            ui.label("Проблемные процессы завершать через:")
+                            ui.label(data['expiration_timeout'])
                     ui.label("Настройка высокой доступности кластера:")
-                    with ui.grid(columns=2).classes(greed_classes):
-                        ui.label("Уровень отказоустойчивости:")
-                        ui.label(data['expiration_timeout'])
-                        ui.label("Режим распределения нагрузки:")
-                        ui.label(data['expiration_timeout'])
-                with ui.card().classes(card_classes):
-                    ui.label("Отслеживание разрыва соединений:")
-                    with ui.grid(columns=2).classes(greed_classes):
-                        ui.label("Период проверки:")
-                        ui.label(data['expiration_timeout'])
-                        ui.label("Таймаут проверки:")
-                        ui.label(data['life_time_limit'])
+                    with ui.card().classes(card_classes):
+                        with ui.grid(columns=2).classes(greed_classes):
+                            ui.label("Уровень отказоустойчивости:")
+                            ui.label(data['expiration_timeout'])
+                            ui.label("Режим распределения нагрузки:")
+                            ui.label(data['expiration_timeout'])
+                    with ui.card().classes(card_classes):
+                        ui.label("Отслеживание разрыва соединений:")
+                        with ui.grid(columns=2).classes(greed_classes):
+                            ui.label("Период проверки:")
+                            ui.label(data['expiration_timeout'])
+                            ui.label("Таймаут проверки:")
+                            ui.label(data['life_time_limit'])
             with ui.tab_panel(edit):
                 ui.label("Параметры кластера:")
                 with ui.grid(columns=2).classes(greed_classes):

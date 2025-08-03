@@ -7,11 +7,13 @@ def get_work_server(connect_info, work_server_id):
         rac = RasInterface(req=connect_info)
         working_server_info = rac.java_get_working_server_info(server_id=work_server_id)
         assignment_rules_list = rac.java_get_assignment_rules(server_id=work_server_id)
+        service_list = rac.java_get_cluster_service_all()
         rac.close()
     except Exception as ex:
         raise Exception(f"Произошла ошибка при получении данных из RAS. Текст ошибки: {ex}")
     try:
         result: dict = {}
+        services: dict = {_.getName(): _.getDescr() for _ in service_list}
         result['working_server_info'] = {}
         result['working_server_info']["cluster_main_port"] = working_server_info.getClusterMainPort()
         result['working_server_info']["connections_per_working_process_limit"] = working_server_info.getConnectionsPerWorkingProcessLimit()
@@ -45,7 +47,7 @@ def get_work_server(connect_info, work_server_id):
                     "application_ext": one_assignment_rule.getApplicationExt(),
                     "assignment_rule_id": one_assignment_rule.getAssignmentRuleId().toString(),
                     "info_base_name": one_assignment_rule.getInfoBaseName() if one_assignment_rule.getInfoBaseName() != "" else "Для всех",
-                    "object_type": one_assignment_rule.getObjectType() if one_assignment_rule.getObjectType() != "" else "Для всех",
+                    "object_type": services[one_assignment_rule.getObjectType()] if one_assignment_rule.getObjectType() != "" else "Для всех",
                     "priority": one_assignment_rule.getPriority(),
                     "rule_type": rule_types[one_assignment_rule.getRuleType()]
                 }

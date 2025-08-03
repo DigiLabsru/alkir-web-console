@@ -11,7 +11,7 @@ def show_cluster_manager(connect_info, main_container):
     main_container.classes.clear()
     with main_container.classes(f'{show_admins_default_classes} justify-center items-center grow'):
         ui.spinner('gears', size='6em')
-    ui.timer(0.5, once=True, callback=lambda: load_data(container=main_container, connect_info=connect_info))
+        ui.timer(0.5, once=True, callback=lambda: load_data(container=main_container, connect_info=connect_info))
 
 
 async def load_data(container, connect_info):

@@ -3,20 +3,21 @@ from ...common.interface.ras.ras import RasInterface
 
 def gen_menu_data(server: str):
     from ...main import start_settings
-    central_admins_list: list = []
+
+    # central_admins_list: list = []
     clusters_list: list = []
     # SimpleDateFormat = jpype.JClass('java.text.SimpleDateFormat')
     # sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     # cluster_info: dict = {}
     for one_server in start_settings.server_list:
-        if server == one_server.ras_server:
+        if server == f'{one_server.ras_server}:{one_server.ras_port}':
             try:
                 rac = RasInterface(req=one_server)
                 cluster_list = rac.java_get_clusters()
                 agent_admins_list = rac.java_get_agent_admins()
                 platform_version = rac.java_get_agent_version()
-                for one_agent_admin in agent_admins_list:
-                    central_admins_list.append({"id": f"central_admins|{one_agent_admin.getName()}", "text": one_agent_admin.getName()})
+                # for one_agent_admin in agent_admins_list:
+                #     central_admins_list.append({"id": f"central_admins|{one_agent_admin.getName()}", "text": one_agent_admin.getName()})
                 rac.close()
             except Exception as ex:
                 raise Exception(f"Произошла ошибка при получении данных из RAS. Текст ошибки: {ex}")
@@ -122,7 +123,7 @@ def gen_menu_data(server: str):
                             {"id": f"clusters|{current_cluster_id}|all_sessions", "text": "Сеансы"},
                             {"id": f"clusters|{current_cluster_id}|locks", "text": "Блокировки"},
                             {"id": f"clusters|{current_cluster_id}|connections", "text": "Соединения"},
-                            {"id": f"clusters|{current_cluster_id}|admins", "text": f"Администраторы ({cluster_admins_list.size()})"},
+                            {"id": f"clusters|{current_cluster_id}|admins", "text": f"Администраторы кластера ({cluster_admins_list.size()})"},
                             # {"id": f"clusters|{current_cluster_id}|security_profiles", "text": "Профили безопасности"},
                             # {"id": f"clusters|{current_cluster_id}|resource_consumption_counters", "text": "Счетчики потребления ресурсов"},
                             # {"id": f"clusters|{current_cluster_id}|resource_consumption_restrictions", "text": "Ограничения потребления ресурсов"}
@@ -133,6 +134,6 @@ def gen_menu_data(server: str):
                 raise Exception(f"Произошла ошибка при обработке данных при построении меню. Текст ошибки: {ex}")
     menu_data: dict = [
         {"id": "clusters", 'text': f'Кластеры ({platform_version})', 'children': clusters_list},
-        {"id": "central_admins", 'text': 'Администраторы', 'children': central_admins_list}
+        {"id": "central_admins", 'text': f'Администраторы агента ({len(agent_admins_list)})'}
     ]
     return menu_data
