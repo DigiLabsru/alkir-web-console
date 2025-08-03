@@ -1,11 +1,10 @@
 from ...common.interface.ras.ras import RasInterface
 
 
-def del_sessions(session_to_kill, connect_info):
+def del_cluster_admin(remove_admin_name, connect_info):
     try:
         rac = RasInterface(req=connect_info)
-        rac.java_terminate_session(sid=session_to_kill['sid'])
+        rac.java_unreg_cluster_admin(remove_admin_name=remove_admin_name)
         rac.close()
-        return [False, ""]
     except Exception as ex:
-        return [True, ex]
+        raise Exception(f"При удалении администратора агента произошла ошибка. Текст ошибки: {ex}")

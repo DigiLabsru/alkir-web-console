@@ -61,11 +61,11 @@ async def del_agent_admins(table, connect_info, del_button):
     del_button.disable()
     agent_admin_to_del = await table.run_grid_method('getSelectedRows')
     for one_agent_admin_to_del in agent_admin_to_del:
-        error, message = await run.io_bound(del_agent_admin, remove_admin_name=one_agent_admin_to_del['name'], connect_info=connect_info)
-        if error is False:
+        try:
+            await run.io_bound(del_agent_admin, remove_admin_name=one_agent_admin_to_del['name'], connect_info=connect_info)
             ui.notify(message=f"Администратора агента {one_agent_admin_to_del['name']} успешно удален", type='positive', position='top-right')
-        else:
-            ui.notify(message=f"Попытка удалить администратора агента {one_agent_admin_to_del['name']} завершилась неудачей. Текст ошибки: {message}", type='negative', position='top-right')
+        except Exception as ex:
+            ui.notify(message=f"Попытка удалить администратора агента {one_agent_admin_to_del['name']} завершилась неудачей. Текст ошибки: {ex}", type='negative', position='top-right')
     await update_table_data(table=table, connect_info=connect_info)
     del_button.enable()
 
@@ -109,7 +109,6 @@ async def add_user(connect_info, table):
             pwd1 = local_pwd_one.value
             pwd2 = local_pwd_two.value
             os_user_val = os_user.value.strip()
-
             # 1. Проверка user_login и user_descr
             valid_name_pattern = re.compile(r'^[a-zA-Zа-яА-ЯёЁ0-9_-]{1,}$')
             valid_pwd_pattern = re.compile(r'^[a-zA-Z0-9_-]{0,}$')
@@ -123,7 +122,6 @@ async def add_user(connect_info, table):
                 return False
             else:
                 new_agent_admin_data['new_admin_descr'] = descr_val
-
             # 2. Проверка совпадения паролей
             if local_auth.value:
                 if pwd1 != pwd2:
@@ -146,7 +144,6 @@ async def add_user(connect_info, table):
             if local_auth.value is False and os_auth.value is False:
                 ui.notify('Должен быть выбран один из вариантов аутентификации (локальный или доменный)', type='negative', position='top-right')
                 return False
-
             return True
 
         async def create_user():

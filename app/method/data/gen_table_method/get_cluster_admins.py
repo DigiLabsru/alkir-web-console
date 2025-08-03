@@ -2,7 +2,7 @@ from ....common.interface.ras.ras import RasInterface
 from .table_descriptions.get_admins_table import columns
 
 
-def get_admins(connect_info):
+def get_cluster_admins(connect_info):
     try:
         rac = RasInterface(req=connect_info)
         cluster_admins_list = rac.java_get_cluster_admins()

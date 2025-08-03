@@ -4,8 +4,6 @@ from ....common.interface.ras.ras import RasInterface
 from .table_descriptions.get_all_locks_table import columns
 from .variable.app_translate import app_translate
 
-# from .variable.app_translate import app_translate
-
 
 def get_all_locks(connect_info):
     try:
@@ -28,9 +26,6 @@ def get_all_locks(connect_info):
         pass
     except Exception as ex:
         raise Exception(f"Произошла ошибка при получении данных из RAS. Текст ошибки: {ex}")
-
-    locks_all[5].getConnectionId().toString()
-    connection_all[0].getInfoBaseConnectionId().toString()
     try:
         result: list = {}
         result['columns'] = columns
