@@ -1,24 +1,48 @@
-from nicegui import ui
+from nicegui import run, ui
 
-# from ...common.interface.rac.rac import RaсInterface
+from .get_all_clusters import get_all_clusters
+from .show_add_cluster import show_add_cluster
+
+show_clusters_default_classes: str = 'nicegui-column w-[79%] h-full text-aqua bg-[#2A2A2A] rounded-lg p-2 flex-col'
 
 
 def show_clusters(connect_info, main_container):
     main_container.clear()
     main_container.classes.clear()
-    main_container.classes('nicegui-column w-[79%] h-full text-aqua bg-[#2A2A2A] rounded-lg p-2')
-    central_admin = connect_info.central_admin if connect_info.central_admin != '' else 'Не задан'
-    card_classes: str = 'bg-[#2A2A2A]'
-    greed_classes: str = 'ml-5 text-custom-green p-0 gap-2 text-xs w-full'
+    with main_container.classes(f'{show_clusters_default_classes} justify-center items-center grow'):
+        ui.spinner('gears', size='6em')
+        ui.timer(0.5, once=True, callback=lambda: load_data(main_container=main_container, connect_info=connect_info))
+
+
+async def load_data(connect_info, main_container):
+    data = await run.io_bound(get_all_clusters, connect_info=connect_info)
+    main_container.clear()
+    main_container.classes.clear()
+    with main_container.classes(f'{show_clusters_default_classes} justify-start items-start'):
+        with ui.row().classes('w-full justify-end items-center gap-2'):
+            ui.button(icon='domain_add', on_click=lambda: show_add_cluster(connect_info=connect_info, table=table))
+            ui.button(icon='autorenew', on_click=lambda: show_clusters(main_container=main_container, connect_info=connect_info))
+        table = ui.aggrid(
+            options={
+                "defaultColDef": {
+                    "filter": True
+                },
+                "defaultColGroupDef": {
+                    "columnGroupShow": "open"
+                },
+                "autoSizeStrategy": {
+                    "type": 'fitCellContents'
+                },
+                "columnDefs": data["columns"],
+                "rowData": data["data"],
+                "rowSelection": "multiple",
+                # 'suppressDragLeaveHidesColumns': True
+            },
+            auto_size_columns=True
+        ).classes('ag-theme-balham-dark grow')
+        del_button = ui.button('Удалить выбранные кластера', on_click=lambda: del_cluster(
+            table=table, connect_info=connect_info, del_button=del_button)).classes('w-full font-bold rounded flex-none')
+
+
+async def del_cluster(connect_info, table):
     pass
-    with main_container.classes('p-4 gap-4 h-full'):
-        with ui.card().classes(card_classes):
-            with ui.grid(columns=2).classes(greed_classes):
-                ui.label("Сервер подключения")
-                ui.label(connect_info.ras_server)
-                ui.label("Порт подключения")
-                ui.label(connect_info.ras_port)
-                ui.label("Логин центрального агента")
-                ui.label(central_admin)
-                # ui.label("Версия RAS")
-                # ui.label("12")
