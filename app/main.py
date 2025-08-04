@@ -9,8 +9,8 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 from .common.interface.ras.java_runtime import init_jvm, shutdown_jvm
 from .common.schemas.settings import StartSettings, UserList
-from .pages.login_page import create_login_page
-from .pages.main_page import create_main_page
+from .pages.login.login_page import create_login_page
+from .pages.main.main_page import create_main_page
 
 unrestricted_page_routes = {'/login'}
 web_rac_token_dict: list = []
@@ -62,7 +62,7 @@ app.add_middleware(AuthMiddleware)
 
 @ui.page('/')
 def main_interface():
-    create_main_page()
+    create_main_page(start_settings=start_settings)
 
 
 @ui.page('/login')
