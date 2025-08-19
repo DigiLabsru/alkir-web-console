@@ -1,5 +1,5 @@
 {
-	"name": "alkir-web-console",
+	"name": "alkir-web-console-public",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": ".."
